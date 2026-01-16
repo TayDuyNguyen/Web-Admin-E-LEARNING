@@ -6,26 +6,29 @@ export const Header: React.FC = () => {
   const { user } = useApp();
 
   return (
-    <header className="h-16 flex items-center justify-between px-4 md:px-8 border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-sm sticky top-0 z-30">
-      <div className="flex-1 flex items-center max-w-xl">
+    <header className="h-20 flex items-center justify-between px-6 md:px-10 border-b border-slate-800/60 bg-[#0f172a]/90 backdrop-blur-xl sticky top-0 z-40">
+      <div className="flex-1 flex items-center max-w-lg">
         <div className="relative w-full">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">🔍</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg">🔍</span>
           <input
             type="text"
-            placeholder="Tìm kiếm khóa học, học viên..."
-            className="w-full bg-slate-900/50 border border-slate-700 rounded-full py-2 pl-10 pr-4 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all"
+            placeholder="Tìm kiếm nhanh..."
+            className="w-full bg-slate-900/40 border border-slate-800 rounded-2xl py-3 pl-12 pr-4 text-sm text-slate-300 focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500/50 transition-all placeholder:text-slate-600"
           />
         </div>
       </div>
 
-      <div className="flex items-center gap-6 ml-4">
-        <div className="flex items-center gap-3 cursor-pointer group">
+      <div className="flex items-center gap-8 ml-6">
+        <div className="flex items-center gap-4 cursor-pointer group">
           <div className="text-right hidden sm:block">
-            <p className="text-sm font-semibold text-slate-100 group-hover:text-blue-400 transition-colors">{user.role}</p>
-            <p className="text-xs text-slate-500">{user.name}</p>
+            <p className="text-sm font-black text-slate-100 group-hover:text-blue-400 transition-colors uppercase tracking-tight">Quản trị viên</p>
+            <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mt-0.5">Quản trị hệ thống</p>
           </div>
-          <div className="w-10 h-10 rounded-full border-2 border-slate-700 p-0.5 group-hover:border-blue-500 transition-all">
-            <img src={user.avatar} alt="Avatar" className="w-full h-full rounded-full object-cover" />
+          <div className="relative">
+            <div className="w-12 h-12 rounded-2xl border-2 border-slate-700 overflow-hidden p-0.5 group-hover:border-blue-500 transition-all shadow-xl shadow-black/20">
+              <img src="https://i.pravatar.cc/150?u=admin-lms" alt="Avatar" className="w-full h-full rounded-[14px] object-cover" />
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-4 border-[#0f172a] rounded-full shadow-lg shadow-emerald-500/20" />
           </div>
         </div>
       </div>

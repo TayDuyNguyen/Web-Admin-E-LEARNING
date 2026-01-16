@@ -21,12 +21,19 @@ const MENU_ITEMS: MenuItem[] = [
   {
     title: 'Người dùng',
     icon: '👥',
-    path: '/admin/users'
+    children: [
+      { title: 'Tất cả người dùng', path: '/admin/users' },
+      { title: 'Vai trò & Quyền', path: '/admin/roles' },
+    ]
   },
   {
     title: 'Khóa học',
     icon: '🎓',
-    path: '/admin/courses'
+    children: [
+      { title: 'Tất cả khóa học', path: '/admin/courses' },
+      { title: 'Danh mục', path: '/admin/categories' },
+      { title: 'Trình tạo khóa học', path: '/admin/course-builder' },
+    ]
   },
   {
     title: 'Nội dung',
@@ -71,7 +78,7 @@ export const Sidebar: React.FC = () => {
           <span className="text-white text-xl">🎓</span>
         </div>
         <div>
-          <h1 className="text-lg font-bold text-slate-50 leading-tight">LMS Admin</h1>
+          <h1 className="text-lg font-bold text-slate-50 leading-tight">Quản trị LMS</h1>
           <p className="text-xs text-slate-400">Hệ thống quản lý</p>
         </div>
       </div>
@@ -84,9 +91,11 @@ export const Sidebar: React.FC = () => {
               <div>
                 <button
                   onClick={() => setExpanded(expanded === item.title ? null : item.title)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl transition-all hover:bg-slate-800/50 group"
+                  className={`w-full flex items-center justify-between p-3 rounded-xl transition-all hover:bg-slate-800/50 group ${
+                    expanded === item.title ? 'text-slate-100' : 'text-slate-400'
+                  }`}
                 >
-                  <div className="flex items-center gap-3 text-slate-400 group-hover:text-slate-100">
+                  <div className="flex items-center gap-3">
                     <span className="text-lg">{item.icon}</span>
                     <span className="font-medium">{item.title}</span>
                   </div>

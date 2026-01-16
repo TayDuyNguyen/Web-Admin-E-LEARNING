@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StatsCardData, CourseSummary, Activity } from '../../shared/types/dashboard';
 import { Card } from '../../shared/ui/Card';
 
@@ -25,6 +26,7 @@ export const StatsGrid: React.FC<{ stats: StatsCardData[] }> = ({ stats }) => {
 };
 
 export const CoursesTable: React.FC<{ courses: CourseSummary[] }> = ({ courses }) => {
+  const navigate = useNavigate();
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left">
@@ -38,8 +40,12 @@ export const CoursesTable: React.FC<{ courses: CourseSummary[] }> = ({ courses }
         </thead>
         <tbody className="divide-y divide-slate-800">
           {courses.map((course) => (
-            <tr key={course.id} className="group hover:bg-slate-800/20 transition-colors">
-              <td className="py-4 px-4 font-medium text-slate-200">{course.title}</td>
+            <tr 
+              key={course.id} 
+              className="group hover:bg-slate-800/20 transition-colors cursor-pointer"
+              onClick={() => navigate(`/admin/courses/${course.id}`)}
+            >
+              <td className="py-4 px-4 font-medium text-slate-200 group-hover:text-blue-400 transition-colors">{course.title}</td>
               <td className="py-4 px-4 text-slate-400">{course.instructor}</td>
               <td className="py-4 px-4 text-slate-300 font-bold">{course.students.toLocaleString()}</td>
               <td className="py-4 px-4">
