@@ -48,12 +48,22 @@ const MENU_ITEMS: MenuItem[] = [
   {
     title: 'Cộng đồng',
     icon: '💬',
-    path: '/admin/community'
+    children: [
+      { title: 'Thảo luận', path: '/admin/discussions' },
+      { title: 'Đánh giá', path: '/admin/reviews' },
+      { title: 'Bình luận', path: '/admin/comments' },
+      { title: 'Báo cáo', path: '/admin/reports' },
+    ]
   },
   {
     title: 'Phân tích',
     icon: '📉',
-    path: '/admin/analytics'
+    children: [
+      { title: 'Phân tích học tập', path: '/admin/analytics/learning' },
+      { title: 'Phân tích người dùng', path: '/admin/analytics/users' },
+      { title: 'Phân tích doanh thu', path: '/admin/analytics/revenue' },
+      { title: 'Báo cáo tương tác', path: '/admin/analytics/engagement' },
+    ]
   },
   {
     title: 'Chứng chỉ',

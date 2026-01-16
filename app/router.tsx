@@ -15,6 +15,14 @@ import { ExercisePage } from '../features/exercise/exercise.page';
 import { QuizPage } from '../features/quiz/quiz.page';
 import { QuestionPage } from '../features/question/question.page';
 import { RolesPermissionsPage } from '../features/role/role.page';
+import { DiscussionModerationPage } from '../features/discussion/discussion.page';
+import { ReviewManagementPage } from '../features/review/review.page';
+import { ReportManagementPage } from '../features/report/report.page';
+import { CommentManagementPage } from '../features/comment/comment.page';
+import { LearningAnalyticsPage } from '../features/analytics/learning-analytics.page';
+import { UserAnalyticsPage } from '../features/analytics/user-analytics.page';
+import { RevenueAnalyticsPage } from '../features/analytics/revenue-analytics.page';
+import { EngagementAnalyticsPage } from '../features/analytics/engagement-analytics.page';
 
 export const AppRouter: React.FC = () => {
   return (
@@ -35,9 +43,20 @@ export const AppRouter: React.FC = () => {
           <Route path="/admin/exercises" element={<ExercisePage />} />
           <Route path="/admin/quizzes" element={<QuizPage />} />
           <Route path="/admin/questions" element={<QuestionPage />} />
+          <Route path="/admin/discussions" element={<DiscussionModerationPage />} />
+          <Route path="/admin/reviews" element={<ReviewManagementPage />} />
+          <Route path="/admin/reports" element={<ReportManagementPage />} />
+          <Route path="/admin/comments" element={<CommentManagementPage />} />
+          <Route path="/admin/analytics/learning" element={<LearningAnalyticsPage />} />
+          <Route path="/admin/analytics/users" element={<UserAnalyticsPage />} />
+          <Route path="/admin/analytics/revenue" element={<RevenueAnalyticsPage />} />
+          <Route path="/admin/analytics/engagement" element={<EngagementAnalyticsPage />} />
+          
           {/* Placeholder routes for other sections */}
+          <Route path="/admin/analytics" element={<Navigate to="/admin/analytics/learning" replace />} />
           <Route path="/admin/assignments" element={<Navigate to="/admin/exercises" replace />} />
           <Route path="/admin/content" element={<div className="p-8">Nội dung - Coming Soon</div>} />
+          <Route path="/admin/community" element={<Navigate to="/admin/discussions" replace />} />
         </Route>
       </Routes>
     </HashRouter>
