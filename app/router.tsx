@@ -23,6 +23,11 @@ import { LearningAnalyticsPage } from '../features/analytics/learning-analytics.
 import { UserAnalyticsPage } from '../features/analytics/user-analytics.page';
 import { RevenueAnalyticsPage } from '../features/analytics/revenue-analytics.page';
 import { EngagementAnalyticsPage } from '../features/analytics/engagement-analytics.page';
+import { NotificationCenterPage } from '../features/notification/notification.page';
+import { GeneralSettingsPage } from '../features/settings/general-settings.page';
+import { LearningSettingsPage } from '../features/settings/learning-settings.page';
+import { StorageMediaSettingsPage } from '../features/settings/storage-settings.page';
+import { SecuritySettingsPage } from '../features/settings/security-settings.page';
 
 export const AppRouter: React.FC = () => {
   return (
@@ -51,8 +56,13 @@ export const AppRouter: React.FC = () => {
           <Route path="/admin/analytics/users" element={<UserAnalyticsPage />} />
           <Route path="/admin/analytics/revenue" element={<RevenueAnalyticsPage />} />
           <Route path="/admin/analytics/engagement" element={<EngagementAnalyticsPage />} />
+          <Route path="/admin/notifications" element={<NotificationCenterPage />} />
+          <Route path="/admin/settings/general" element={<GeneralSettingsPage />} />
+          <Route path="/admin/settings/learning" element={<LearningSettingsPage />} />
+          <Route path="/admin/settings/storage" element={<StorageMediaSettingsPage />} />
+          <Route path="/admin/settings/security" element={<SecuritySettingsPage />} />
           
-          {/* Placeholder routes for other sections */}
+          <Route path="/admin/settings" element={<Navigate to="/admin/settings/general" replace />} />
           <Route path="/admin/analytics" element={<Navigate to="/admin/analytics/learning" replace />} />
           <Route path="/admin/assignments" element={<Navigate to="/admin/exercises" replace />} />
           <Route path="/admin/content" element={<div className="p-8">Nội dung - Coming Soon</div>} />

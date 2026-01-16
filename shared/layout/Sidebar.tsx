@@ -78,7 +78,12 @@ const MENU_ITEMS: MenuItem[] = [
   {
     title: 'Cài đặt',
     icon: '⚙️',
-    path: '/admin/settings'
+    children: [
+      { title: 'Cài đặt chung', path: '/admin/settings/general' },
+      { title: 'Học tập', path: '/admin/settings/learning' },
+      { title: 'Lưu trữ & Phương tiện', path: '/admin/settings/storage' },
+      { title: 'Bảo mật', path: '/admin/settings/security' },
+    ]
   },
 ];
 
