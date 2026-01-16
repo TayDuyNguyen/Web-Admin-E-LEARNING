@@ -8,20 +8,20 @@ export const StatsGrid: React.FC<{ stats: StatsCardData[] }> = ({ stats }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {stats.map((stat, idx) => (
-        <Card key={idx} className="group relative overflow-hidden border-slate-800/50 hover:border-blue-500/30 transition-all duration-500">
+        <Card key={idx} className="group relative overflow-hidden border-slate-800/50 hover:border-blue-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/5">
           <div className="absolute top-0 right-0 p-3 opacity-5 group-hover:opacity-10 transition-opacity">
             <span className="text-6xl">{stat.icon}</span>
           </div>
           <div className="flex justify-between items-start mb-4">
-            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl ${
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl transition-transform group-hover:scale-110 ${
               stat.color === 'blue' ? 'bg-blue-600/10 text-blue-500' :
               stat.color === 'purple' ? 'bg-purple-600/10 text-purple-500' :
-              stat.color === 'emerald' ? 'bg-emerald-600/10 text-emerald-500' : 'bg-amber-600/10 text-amber-500'
+              stat.color === 'emerald' ? 'bg-emerald-600/10 text-emerald-400' : 'bg-amber-600/10 text-amber-500'
             }`}>
               {stat.icon}
             </div>
             <div className={`flex items-center text-[10px] font-black px-2 py-0.5 rounded-full ${stat.change >= 0 ? 'text-emerald-400 bg-emerald-400/10' : 'text-rose-400 bg-rose-400/10'}`}>
-              {stat.change > 0 ? '+' : ''}{stat.change}% <span>↑</span>
+              {stat.change > 0 ? '+' : ''}{stat.change}% <span>{stat.change >= 0 ? '↑' : '↓'}</span>
             </div>
           </div>
           <p className="text-slate-500 text-[10px] uppercase font-black tracking-widest mb-1">{stat.title}</p>
@@ -79,7 +79,7 @@ export const ActivityList: React.FC<{ activities: Activity[] }> = ({ activities 
   return (
     <div className="space-y-6 mt-4">
       {activities.map((activity) => (
-        <div key={activity.id} className="flex gap-4 group">
+        <div key={activity.id} className="flex gap-4 group animate-in fade-in slide-in-from-top-2 duration-500">
           <div className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center border border-slate-800 transition-all group-hover:scale-110 ${
             activity.icon === 'user-plus' ? 'bg-blue-400/10 text-blue-400' :
             activity.icon === 'dollar-sign' ? 'bg-emerald-400/10 text-emerald-400' : 
@@ -95,6 +95,9 @@ export const ActivityList: React.FC<{ activities: Activity[] }> = ({ activities 
           </div>
         </div>
       ))}
+      {activities.length === 0 && (
+        <p className="text-center text-xs text-slate-600 py-4 italic">Chưa có hoạt động mới nào.</p>
+      )}
     </div>
   );
 };
@@ -102,7 +105,7 @@ export const ActivityList: React.FC<{ activities: Activity[] }> = ({ activities 
 export const SystemHealthWidget: React.FC<{ health: SystemHealth[] }> = ({ health }) => (
   <div className="grid grid-cols-3 gap-4 mb-8">
     {health.map((item, i) => (
-      <div key={i} className="p-4 bg-[#0f172a] border border-slate-800 rounded-2xl">
+      <div key={i} className="p-4 bg-[#0f172a] border border-slate-800 rounded-2xl hover:border-slate-700 transition-colors">
         <div className="flex items-center gap-2 mb-1">
            <div className={`w-1.5 h-1.5 rounded-full ${item.status === 'online' ? 'bg-emerald-500' : item.status === 'warning' ? 'bg-amber-500 animate-pulse' : 'bg-rose-500'}`} />
            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{item.label}</span>

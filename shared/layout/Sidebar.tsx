@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 interface MenuItem {
   title: string;
@@ -14,7 +14,7 @@ const MENU_ITEMS: MenuItem[] = [
     title: 'Bảng điều khiển',
     icon: '📊',
     children: [
-      { title: 'Tổng quan', path: '/admin/dashboard' },
+      { title: 'Tổng quan', path: '/admin' },
       { title: 'Trạng thái hệ thống', path: '/admin/status' },
     ]
   },
@@ -71,8 +71,6 @@ const MENU_ITEMS: MenuItem[] = [
     children: [
       { title: 'Thành tích', path: '/admin/gamification/achievements' },
       { title: 'Hệ thống điểm', path: '/admin/gamification/points' },
-      { title: 'Nhiệm vụ', path: '/admin/gamification/quests' },
-      { title: 'Hạng học viên', path: '/admin/gamification/tiers' },
     ]
   },
   {
@@ -81,7 +79,6 @@ const MENU_ITEMS: MenuItem[] = [
     children: [
       { title: 'Nhập/Xuất', path: '/admin/tools/import-export' },
       { title: 'Nhật ký', path: '/admin/tools/logs' },
-      { title: 'Di động', path: '/admin/tools/mobile' },
     ]
   },
   {
@@ -103,7 +100,23 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 export const Sidebar: React.FC = () => {
+  const location = useLocation();
   const [expanded, setExpanded] = useState<string | null>('Bảng điều khiển');
+
+  // Auto-expand based on current route
+  useEffect(() => {
+    // Exact match or subpath match for expansion
+    const activeItem = MENU_ITEMS.find(item => 
+      item.children?.some(child => {
+        if (child.path === '/admin') return location.pathname === '/admin';
+        return location.pathname.startsWith(child.path);
+      })
+    );
+    
+    if (activeItem) {
+      setExpanded(activeItem.title);
+    }
+  }, [location.pathname]);
 
   return (
     <aside className="w-64 flex-shrink-0 flex flex-col border-r border-slate-800 bg-[#0f172a] hidden lg:flex">
@@ -114,12 +127,12 @@ export const Sidebar: React.FC = () => {
         </div>
         <div>
           <h1 className="text-lg font-bold text-slate-50 leading-tight">Quản trị LMS</h1>
-          <p className="text-xs text-slate-400">Hệ thống quản lý</p>
+          <p className="text-xs text-slate-400 font-bold uppercase tracking-widest opacity-60">Admin Pro</p>
         </div>
       </div>
 
       {/* Menu */}
-      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
         {MENU_ITEMS.map((item) => (
           <div key={item.title}>
             {item.children ? (
@@ -127,24 +140,27 @@ export const Sidebar: React.FC = () => {
                 <button
                   onClick={() => setExpanded(expanded === item.title ? null : item.title)}
                   className={`w-full flex items-center justify-between p-3 rounded-xl transition-all hover:bg-slate-800/50 group ${
-                    expanded === item.title ? 'text-slate-100' : 'text-slate-400'
+                    expanded === item.title ? 'text-slate-100 bg-slate-800/20' : 'text-slate-400'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-lg">{item.icon}</span>
-                    <span className="font-medium">{item.title}</span>
+                    <span className="text-lg grayscale group-hover:grayscale-0 transition-all">{item.icon}</span>
+                    <span className="font-bold text-sm tracking-tight">{item.title}</span>
                   </div>
-                  <span className={`text-xs transition-transform ${expanded === item.title ? 'rotate-180' : ''}`}>▼</span>
+                  <span className={`text-[8px] transition-transform duration-300 ${expanded === item.title ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {expanded === item.title && (
-                  <div className="ml-9 mt-1 space-y-1">
+                  <div className="ml-9 mt-1 space-y-1 border-l border-slate-800/50 pl-2">
                     {item.children.map((child) => (
                       <NavLink
                         key={child.title}
                         to={child.path}
+                        end={child.path === '/admin'}
                         className={({ isActive }) => `
-                          block px-4 py-2 text-sm rounded-lg transition-colors
-                          ${isActive ? 'text-blue-400 font-semibold' : 'text-slate-500 hover:text-slate-300'}
+                          block px-4 py-2 text-xs rounded-lg transition-all
+                          ${isActive 
+                            ? 'text-blue-400 font-black bg-blue-400/5 translate-x-1' 
+                            : 'text-slate-500 hover:text-slate-300 hover:translate-x-1'}
                         `}
                       >
                         {child.title}
@@ -158,12 +174,12 @@ export const Sidebar: React.FC = () => {
                 to={item.path || '#'}
                 className={({ isActive }) => `
                   flex items-center justify-between p-3 rounded-xl transition-all group
-                  ${isActive ? 'bg-blue-600/10 text-blue-400' : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-100'}
+                  ${isActive ? 'bg-blue-600/10 text-blue-400 shadow-inner' : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-100'}
                 `}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-lg">{item.icon}</span>
-                  <span className="font-medium">{item.title}</span>
+                  <span className="text-lg grayscale group-hover:grayscale-0 transition-all">{item.icon}</span>
+                  <span className="font-bold text-sm tracking-tight">{item.title}</span>
                 </div>
               </NavLink>
             )}
@@ -172,10 +188,10 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Help / Bottom */}
-      <div className="p-4 border-t border-slate-800">
-        <button className="w-full flex items-center gap-3 p-3 text-slate-400 hover:text-slate-100 transition-all rounded-xl hover:bg-slate-800/50">
-          <span className="text-lg">🎧</span>
-          <span className="font-medium">Hỗ trợ</span>
+      <div className="p-4 border-t border-slate-800/50">
+        <button className="w-full flex items-center gap-3 p-3 text-slate-500 hover:text-blue-400 transition-all rounded-xl hover:bg-blue-400/5 group">
+          <span className="text-lg grayscale group-hover:grayscale-0 transition-all">🎧</span>
+          <span className="font-bold text-xs uppercase tracking-widest">Trung tâm hỗ trợ</span>
         </button>
       </div>
     </aside>

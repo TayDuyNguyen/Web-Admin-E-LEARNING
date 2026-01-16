@@ -38,47 +38,56 @@ export const AppRouter: React.FC = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route element={<AdminLayout />}>
-          <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="/admin/dashboard" element={<DashboardPage />} />
-          <Route path="/admin/status" element={<SystemStatusPage />} />
-          <Route path="/admin/users" element={<UserManagementPage />} />
-          <Route path="/admin/users/:id" element={<UserDetailPage />} />
-          <Route path="/admin/roles" element={<RolesPermissionsPage />} />
-          <Route path="/admin/courses" element={<CourseListPage />} />
-          <Route path="/admin/courses/:id" element={<CourseDetailPage />} />
-          <Route path="/admin/categories" element={<CategoryPage />} />
-          <Route path="/admin/course-builder" element={<CourseBuilderPage />} />
-          <Route path="/admin/lessons" element={<LessonPage />} />
-          <Route path="/admin/exercises" element={<ExercisePage />} />
-          <Route path="/admin/quizzes" element={<QuizPage />} />
-          <Route path="/admin/questions" element={<QuestionPage />} />
-          <Route path="/admin/discussions" element={<DiscussionModerationPage />} />
-          <Route path="/admin/reviews" element={<ReviewManagementPage />} />
-          <Route path="/admin/reports" element={<ReportManagementPage />} />
-          <Route path="/admin/comments" element={<CommentManagementPage />} />
-          <Route path="/admin/analytics/learning" element={<LearningAnalyticsPage />} />
-          <Route path="/admin/analytics/users" element={<UserAnalyticsPage />} />
-          <Route path="/admin/analytics/revenue" element={<RevenueAnalyticsPage />} />
-          <Route path="/admin/analytics/engagement" element={<EngagementAnalyticsPage />} />
-          <Route path="/admin/notifications" element={<NotificationCenterPage />} />
-          <Route path="/admin/settings/general" element={<GeneralSettingsPage />} />
-          <Route path="/admin/settings/learning" element={<LearningSettingsPage />} />
-          <Route path="/admin/settings/storage" element={<StorageMediaSettingsPage />} />
-          <Route path="/admin/settings/security" element={<SecuritySettingsPage />} />
-          <Route path="/admin/settings/permissions" element={<PermissionsSettingsPage />} />
-          <Route path="/admin/tools/import-export" element={<ImportExportPage />} />
-          <Route path="/admin/tools/logs" element={<SystemLogsPage />} />
-          <Route path="/admin/gamification/achievements" element={<AchievementManagementPage />} />
-          <Route path="/admin/gamification/points" element={<RewardPointsPage />} />
+        {/* 1. Redirect gốc về phân vùng quản trị */}
+        <Route path="/" element={<Navigate to="/admin" replace />} />
+
+        {/* 2. Cấu hình phân vùng Quản trị */}
+        <Route path="/admin" element={<AdminLayout />}>
+          {/* Mặc định hiển thị Dashboard ngay khi vào /admin */}
+          <Route index element={<DashboardPage />} />
           
-          <Route path="/admin/settings" element={<Navigate to="/admin/settings/general" replace />} />
-          <Route path="/admin/analytics" element={<Navigate to="/admin/analytics/learning" replace />} />
-          <Route path="/admin/assignments" element={<Navigate to="/admin/exercises" replace />} />
-          <Route path="/admin/content" element={<div className="p-8">Nội dung - Coming Soon</div>} />
-          <Route path="/admin/community" element={<Navigate to="/admin/discussions" replace />} />
-          <Route path="/admin/tools" element={<Navigate to="/admin/tools/import-export" replace />} />
+          {/* Vẫn giữ path dashboard để hỗ trợ các liên kết cũ nếu cần */}
+          <Route path="dashboard" element={<Navigate to="/admin" replace />} />
+          
+          <Route path="status" element={<SystemStatusPage />} />
+          <Route path="users" element={<UserManagementPage />} />
+          <Route path="users/:id" element={<UserDetailPage />} />
+          <Route path="roles" element={<RolesPermissionsPage />} />
+          <Route path="courses" element={<CourseListPage />} />
+          <Route path="courses/:id" element={<CourseDetailPage />} />
+          <Route path="categories" element={<CategoryPage />} />
+          <Route path="course-builder" element={<CourseBuilderPage />} />
+          <Route path="lessons" element={<LessonPage />} />
+          <Route path="exercises" element={<ExercisePage />} />
+          <Route path="quizzes" element={<QuizPage />} />
+          <Route path="questions" element={<QuestionPage />} />
+          <Route path="discussions" element={<DiscussionModerationPage />} />
+          <Route path="reviews" element={<ReviewManagementPage />} />
+          <Route path="reports" element={<ReportManagementPage />} />
+          <Route path="comments" element={<CommentManagementPage />} />
+          <Route path="analytics/learning" element={<LearningAnalyticsPage />} />
+          <Route path="analytics/users" element={<UserAnalyticsPage />} />
+          <Route path="analytics/revenue" element={<RevenueAnalyticsPage />} />
+          <Route path="analytics/engagement" element={<EngagementAnalyticsPage />} />
+          <Route path="notifications" element={<NotificationCenterPage />} />
+          <Route path="settings/general" element={<GeneralSettingsPage />} />
+          <Route path="settings/learning" element={<LearningSettingsPage />} />
+          <Route path="settings/storage" element={<StorageMediaSettingsPage />} />
+          <Route path="settings/security" element={<SecuritySettingsPage />} />
+          <Route path="settings/permissions" element={<PermissionsSettingsPage />} />
+          <Route path="tools/import-export" element={<ImportExportPage />} />
+          <Route path="tools/logs" element={<SystemLogsPage />} />
+          <Route path="gamification/achievements" element={<AchievementManagementPage />} />
+          <Route path="gamification/points" element={<RewardPointsPage />} />
+          
+          {/* Phân vùng tắt */}
+          <Route path="settings" element={<Navigate to="/admin/settings/general" replace />} />
+          <Route path="analytics" element={<Navigate to="/admin/analytics/learning" replace />} />
+          <Route path="tools" element={<Navigate to="/admin/tools/import-export" replace />} />
         </Route>
+
+        {/* 3. Fallback */}
+        <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
     </HashRouter>
   );
