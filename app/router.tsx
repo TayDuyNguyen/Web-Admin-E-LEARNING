@@ -10,6 +10,10 @@ import { CourseDetailPage } from '../features/course/course-detail.page';
 import { CourseListPage } from '../features/course/course-list.page';
 import { CategoryPage } from '../features/category/category.page';
 import { CourseBuilderPage } from '../features/course-builder/course-builder.page';
+import { LessonPage } from '../features/lesson/lesson.page';
+import { ExercisePage } from '../features/exercise/exercise.page';
+import { QuizPage } from '../features/quiz/quiz.page';
+import { QuestionPage } from '../features/question/question.page';
 import { RolesPermissionsPage } from '../features/role/role.page';
 
 export const AppRouter: React.FC = () => {
@@ -27,7 +31,12 @@ export const AppRouter: React.FC = () => {
           <Route path="/admin/courses/:id" element={<CourseDetailPage />} />
           <Route path="/admin/categories" element={<CategoryPage />} />
           <Route path="/admin/course-builder" element={<CourseBuilderPage />} />
+          <Route path="/admin/lessons" element={<LessonPage />} />
+          <Route path="/admin/exercises" element={<ExercisePage />} />
+          <Route path="/admin/quizzes" element={<QuizPage />} />
+          <Route path="/admin/questions" element={<QuestionPage />} />
           {/* Placeholder routes for other sections */}
+          <Route path="/admin/assignments" element={<Navigate to="/admin/exercises" replace />} />
           <Route path="/admin/content" element={<div className="p-8">Nội dung - Coming Soon</div>} />
         </Route>
       </Routes>

@@ -38,7 +38,12 @@ const MENU_ITEMS: MenuItem[] = [
   {
     title: 'Nội dung',
     icon: '📝',
-    path: '/admin/content'
+    children: [
+      { title: 'Bài giảng', path: '/admin/lessons' },
+      { title: 'Bài tập', path: '/admin/exercises' },
+      { title: 'Bài kiểm tra', path: '/admin/quizzes' },
+      { title: 'Ngân hàng câu hỏi', path: '/admin/questions' },
+    ]
   },
   {
     title: 'Cộng đồng',
