@@ -66,9 +66,23 @@ const MENU_ITEMS: MenuItem[] = [
     ]
   },
   {
-    title: 'Chứng chỉ',
+    title: 'Trò chơi hóa',
     icon: '🏆',
-    path: '/admin/certificates'
+    children: [
+      { title: 'Thành tích', path: '/admin/gamification/achievements' },
+      { title: 'Hệ thống điểm', path: '/admin/gamification/points' },
+      { title: 'Nhiệm vụ', path: '/admin/gamification/quests' },
+      { title: 'Hạng học viên', path: '/admin/gamification/tiers' },
+    ]
+  },
+  {
+    title: 'Công cụ',
+    icon: '🛠️',
+    children: [
+      { title: 'Nhập/Xuất', path: '/admin/tools/import-export' },
+      { title: 'Nhật ký', path: '/admin/tools/logs' },
+      { title: 'Di động', path: '/admin/tools/mobile' },
+    ]
   },
   {
     title: 'Thông báo',
@@ -83,6 +97,7 @@ const MENU_ITEMS: MenuItem[] = [
       { title: 'Học tập', path: '/admin/settings/learning' },
       { title: 'Lưu trữ & Phương tiện', path: '/admin/settings/storage' },
       { title: 'Bảo mật', path: '/admin/settings/security' },
+      { title: 'Phân quyền', path: '/admin/settings/permissions' },
     ]
   },
 ];

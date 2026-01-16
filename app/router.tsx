@@ -28,6 +28,11 @@ import { GeneralSettingsPage } from '../features/settings/general-settings.page'
 import { LearningSettingsPage } from '../features/settings/learning-settings.page';
 import { StorageMediaSettingsPage } from '../features/settings/storage-settings.page';
 import { SecuritySettingsPage } from '../features/settings/security-settings.page';
+import { PermissionsSettingsPage } from '../features/settings/permission.page';
+import { ImportExportPage } from '../features/import-export/import-export.page';
+import { SystemLogsPage } from '../features/logs/logs.page';
+import { AchievementManagementPage } from '../features/gamification/achievement.page';
+import { RewardPointsPage } from '../features/gamification/points.page';
 
 export const AppRouter: React.FC = () => {
   return (
@@ -61,12 +66,18 @@ export const AppRouter: React.FC = () => {
           <Route path="/admin/settings/learning" element={<LearningSettingsPage />} />
           <Route path="/admin/settings/storage" element={<StorageMediaSettingsPage />} />
           <Route path="/admin/settings/security" element={<SecuritySettingsPage />} />
+          <Route path="/admin/settings/permissions" element={<PermissionsSettingsPage />} />
+          <Route path="/admin/tools/import-export" element={<ImportExportPage />} />
+          <Route path="/admin/tools/logs" element={<SystemLogsPage />} />
+          <Route path="/admin/gamification/achievements" element={<AchievementManagementPage />} />
+          <Route path="/admin/gamification/points" element={<RewardPointsPage />} />
           
           <Route path="/admin/settings" element={<Navigate to="/admin/settings/general" replace />} />
           <Route path="/admin/analytics" element={<Navigate to="/admin/analytics/learning" replace />} />
           <Route path="/admin/assignments" element={<Navigate to="/admin/exercises" replace />} />
           <Route path="/admin/content" element={<div className="p-8">Nội dung - Coming Soon</div>} />
           <Route path="/admin/community" element={<Navigate to="/admin/discussions" replace />} />
+          <Route path="/admin/tools" element={<Navigate to="/admin/tools/import-export" replace />} />
         </Route>
       </Routes>
     </HashRouter>

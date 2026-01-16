@@ -4,6 +4,7 @@ export interface StatsCardData {
   value: string;
   change: number;
   icon: string;
+  color: string;
 }
 
 export interface RegistrationData {
@@ -17,6 +18,7 @@ export interface CourseSummary {
   instructor: string;
   students: number;
   status: 'active' | 'inactive' | 'draft';
+  category: string;
 }
 
 export interface Activity {
@@ -24,5 +26,11 @@ export interface Activity {
   user: string;
   action: string;
   timestamp: string;
-  icon: 'user-plus' | 'dollar-sign' | 'book-open';
+  icon: 'user-plus' | 'dollar-sign' | 'book-open' | 'alert-circle';
+}
+
+export interface SystemHealth {
+  label: string;
+  status: 'online' | 'warning' | 'error';
+  value: string;
 }
